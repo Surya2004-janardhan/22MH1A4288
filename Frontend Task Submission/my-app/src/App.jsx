@@ -141,6 +141,7 @@ const App = () => {
         {currentPage === 'statistics' && (
           <section>
             <button onClick={fetchAllUrls}>Refresh Data</button>
+            
             {allUrls.length === 0 ? <p>No data available</p> : (
   <div className="stats-list">
     {allUrls.map((url, i) => (
@@ -155,9 +156,7 @@ const App = () => {
     ))}
   </div>
 )}
-                </tbody>
-              </table>
-            )}
+        
           </section>
         )}
       </main>
