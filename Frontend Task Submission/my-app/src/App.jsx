@@ -142,28 +142,19 @@ const App = () => {
           <section>
             <button onClick={fetchAllUrls}>Refresh Data</button>
             {allUrls.length === 0 ? <p>No data available</p> : (
-              <table>
-                <thead>
-                  <tr>
-                    <th>Short URL</th>
-                    <th>Original URL</th>
-                    <th>Created</th>
-                    <th>Expires</th>
-                    <th>Clicks</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {allUrls.map((url, i) => (
-                    <tr key={i}>
-                      <td>{url.shortCode}</td>
-                      <td>{url.originalUrl}</td>
-                      <td>{formatDate(url.createdAt)}</td>
-                      <td>{formatDate(url.expiryDate)}</td>
-                      <td>{url.totalClicks}</td>
-                      <td>{isExpired(url.expiryDate) ? 'Expired' : 'Active'}</td>
-                    </tr>
-                  ))}
+  <div className="stats-list">
+    {allUrls.map((url, i) => (
+      <div key={i} className="stats-item">
+        <div className="stats-row"><span className="stats-label">Short URL:</span><span className="stats-value">{API_BASE_URL}/{url.shortCode}</span></div>
+        <div className="stats-row"><span className="stats-label">Original:</span><span className="stats-value">{url.originalUrl}</span></div>
+        <div className="stats-row"><span className="stats-label">Created:</span><span className="stats-value">{formatDate(url.createdAt)}</span></div>
+        <div className="stats-row"><span className="stats-label">Expires:</span><span className="stats-value">{formatDate(url.expiryDate)}</span></div>
+        <div className="stats-row"><span className="stats-label">Clicks:</span><span className="stats-value">{url.totalClicks}</span></div>
+        <div className="stats-row"><span className="stats-label">Status:</span><span className="stats-value">{isExpired(url.expiryDate) ? 'Expired' : 'Active'}</span></div>
+      </div>
+    ))}
+  </div>
+)}
                 </tbody>
               </table>
             )}
